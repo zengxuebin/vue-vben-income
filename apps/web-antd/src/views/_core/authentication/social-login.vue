@@ -14,36 +14,14 @@ defineOptions({ name: 'SocialLogin' });
 
 const authStore = useAuthStore();
 const { query } = useRoute();
-const router = useRouter();
-
 
 /** 尝试登录：当账号已经绑定，socialLogin 会直接获得 token */
 const socialType = Number(getUrlValue('type'));
-const redirect = getUrlValue('redirect');
 const socialCode = query?.code as string;
 const socialState = query?.state as string;
-async function tryLogin() {
-  // 用于登录后，基于 redirect 的重定向
-  if (redirect) {
-    await router.replace({
-      query: {
-        ...query,
-        redirect: encodeURIComponent(redirect),
-      },
-    });
-  }
-
-  // 尝试登录
-  await authStore.authLogin('social', {
-    type: socialType,
-    code: socialCode,
-    state: socialState,
-  });
-}
 
 /** 处理登录 */
 async function handleLogin(values: any) {
-
   // 无验证码，直接登录
   await authStore.authLogin('username', {
     ...values,

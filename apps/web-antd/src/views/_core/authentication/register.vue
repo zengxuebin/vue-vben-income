@@ -3,7 +3,7 @@ import type { VbenFormSchema } from '@vben/common-ui';
 
 import { computed, h, markRaw, ref } from 'vue';
 
-import { AuthenticationRegister, SliderCaptcha, Verification, z } from '@vben/common-ui';
+import { AuthenticationRegister, SliderCaptcha, z } from '@vben/common-ui';
 import { $t } from '@vben/locales';
 
 import { useAuthStore } from '#/store';

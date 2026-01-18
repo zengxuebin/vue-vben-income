@@ -1,12 +1,9 @@
 <script setup lang="ts">
-import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 import { $t } from '@vben/locales';
 
 import { VbenButton } from '@vben-core/shadcn-ui';
-
-import { useQRCode } from '@vueuse/integrations/useQRCode';
 
 import Title from './auth-title.vue';
 
@@ -57,14 +54,6 @@ const props = withDefaults(defineProps<Props>(), {
 
 const router = useRouter();
 
-// const text = ref('https://vben.vvbin.cn');
-const text = ref('https://t.zsxq.com/FUtQd');
-
-const qrcode = useQRCode(text, {
-  errorCorrectionLevel: 'H',
-  margin: 4,
-});
-
 function goToLogin() {
   router.push(props.loginPath);
 }
@@ -86,7 +75,6 @@ function goToLogin() {
     </Title>
 
     <div class="flex-col-center mt-6">
-      <img :src="qrcode" alt="qrcode" class="w-1/2" />
       <p class="text-muted-foreground mt-4 text-sm">
         <slot name="description">
           {{ description || $t('authentication.qrcodePrompt') }}
